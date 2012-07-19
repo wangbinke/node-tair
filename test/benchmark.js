@@ -59,7 +59,7 @@ function main(argv) {
     console.log('usage: node benchmark.js benchname [times=1000]');
     return process.exit(0);
   }
-  bench[test](times);
+  bench[test](parseInt(times, 10));
 }
 
 main(process.argv);
