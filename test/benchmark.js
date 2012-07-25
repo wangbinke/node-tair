@@ -69,7 +69,7 @@ bench.set = function (times) {
 
 function main(argv) {
   var test = argv[2];
-  var times = argv[3] || 1000;
+  var times = argv[3] || 100;
   if (!bench[test]) {
     console.log('usage: node benchmark.js benchname [times=1000]');
     return process.exit(0);
