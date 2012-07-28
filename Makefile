@@ -19,7 +19,6 @@ test-cov: lib-cov
 
 lib-cov: clean
 	@jscoverage lib lib-cov
-	@jscoverage proxy proxy-cov
 
 clean:
 	@rm -rf *-cov
