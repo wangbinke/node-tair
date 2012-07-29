@@ -15,7 +15,12 @@ test-cov-json: lib-cov
 	@JSCOV=1 $(MAKE) test REPORTER=json-cov
 
 test-cov: lib-cov
+	@mv lib lib-bak
+	@mv lib-cov lib
 	@JSCOV=1 $(MAKE) test REPORTER=html-cov > coverage.html
+	@mv lib lib-cov
+	@mv lib-bak lib
+	@rm -rf lib-cov
 
 lib-cov: clean
 	@jscoverage lib lib-cov
