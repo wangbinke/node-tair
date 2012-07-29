@@ -7,6 +7,7 @@
 var cli = require('../lib/client.js');
 var should = require('should');
 var consts = require('../lib/const');
+var fs = require('fs');
 
 describe('client.test.js', function () {
 
@@ -57,6 +58,19 @@ describe('client.test.js', function () {
           should.not.exist(data);
           done();
         });
+      });
+    });
+  });
+
+  it('#set and #get will work well on large data', function (done) {
+    var content = fs.readFileSync('./test/large_text.txt', 'utf-8');
+    cli.set('alargeData', content, function (err, success){
+      should.not.exist(err);
+      success.should.equal(true);
+      cli.get('alargeData', function (err, data){
+        should.not.exist(err);
+        data.should.equal(content);
+        done();
       });
     });
   });
