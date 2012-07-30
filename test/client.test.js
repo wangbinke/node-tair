@@ -64,12 +64,26 @@ describe('client.test.js', function () {
 
   it('#set and #get will work well on large data', function (done) {
     var content = fs.readFileSync('./test/large_text.txt', 'utf-8');
-    cli.set('alargeData', content, function (err, success){
+    cli.set('alargeData', content, function (err, success) {
       should.not.exist(err);
       success.should.equal(true);
-      cli.get('alargeData', function (err, data){
+      cli.get('alargeData', function (err, data) {
         should.not.exist(err);
         data.should.equal(content);
+        done();
+      });
+    });
+  });
+
+  it('#incr and decr will work well', function (done) {
+    var keyName = 'incrTestKey' + new Date().getTime();
+    cli.incr(keyName, 1, function (err, data) {
+      should.not.exist(err);
+      data.should.equal(1);
+
+      cli.decr(keyName, 1, function (err, data) {
+        should.not.exist(err);
+        data.should.equal(0);
         done();
       });
     });

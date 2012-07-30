@@ -1,20 +1,28 @@
-/*!
+/*
  * tair - test/comm.test.js
  * Copyright(c) 2012 Taobao.com
  * Author: kate.sf <kate.sf@taobao.com>
  */
 
-var comm = require('../lib/comm.js');
+var comm = require('../lib/comm');
 var should = require('should');
 
-describe('comm.test.js should do right communation to a server', function () {
-  var reqBuffer = new Buffer('GET / HTTP/1.1 \r\n' +
-    'Host: youth.njupt.edu.cn \r\n' +
-    'Connection: keep-alive\r\n' +
-    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11\r\n' +
-    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n' +
-    'Accept-Encoding: gzip,deflate,sdch\r\n\r\n');
+describe('comm.test.js', function () {
+  it('comm to a bad server should throw', function (done) {
+    var addr = {host: '127.0.0.2', port: 9873};
+    var buf = new Buffer('suibianshenme');
+    comm.getData(addr, buf, function (err, data) {
+      should.exist(err);
+      done();
+    });
+  });
 
-
-
+  it('comm to a non-tair server should throw', function (done) {
+    var addr = {host: '218.2.103.166', port: 80};
+    var buf = new Buffer('get /\r\n');
+    comm.getData(addr, buf, function (err, data) {
+      should.exist(err);
+      done();
+    });
+  });
 });
