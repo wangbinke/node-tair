@@ -25,7 +25,7 @@ bench.get = function (times) {
             console.error(err);
             nvcount++;
           }
-          if(data !== content) {
+          if (data !== content) {
             console.log('not valid!!');
             nvcount++;
           }
@@ -55,7 +55,7 @@ bench.set = function (times) {
         ccount++;
         if (err || !succ) {
           console.error(err);
-          notSucc ++;
+          notSucc++;
         }
         if (ccount === times) {
           console.timeEnd(times + ' times set');
@@ -67,7 +67,35 @@ bench.set = function (times) {
   });
 }
 
-function main(argv) {
+bench.cget = function () {
+  cli.initClient('group_ju', [
+    {host: '10.235.144.116', port: 5198}
+  ], function (err) {
+    if (err) {
+      console.log(err);
+    }
+    getForMem(0, new Date().getTime());
+  });
+};
+
+function getForMem (times, starttime) {
+  cli.get('hello2test', function (err, data) {
+    if (err) {
+      console.log(err);
+    }
+    times = times || 1;
+    times++;
+    if (data !== content) {
+      console.log('not valid!!');
+    }
+    if (times % 1000 == 0) {
+      console.log(times + ': ' + (new Date().getTime() - starttime));
+    }
+    getForMem(times, starttime);
+  });
+}
+
+function main (argv) {
   var test = argv[2];
   var times = argv[3] || 100;
   if (!bench[test]) {
