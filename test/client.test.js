@@ -84,7 +84,11 @@ describe('client.test.js', function () {
       cli.decr(keyName, 1, function (err, data) {
         should.not.exist(err);
         data.should.equal(0);
-        done();
+        cli.incr(keyName, 0, function (err, data) {
+          should.not.exist(err);
+          data.should.equal(0);
+          done();
+        });
       });
     });
   });
