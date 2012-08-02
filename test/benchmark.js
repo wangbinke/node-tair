@@ -64,7 +64,7 @@ function worker (times, starttime, maxTimes, method, cli) {
 
 function main (argv) {
   var test = argv[2];
-  var times = argv[3] || 1000;
+  var times = argv[3] || 200;
   var threads = argv[4] || 5;
   if (!bench[test]) {
     console.log('usage: node benchmark.js benchname [times=100] [threads=5]');
