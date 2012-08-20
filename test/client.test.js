@@ -6,7 +6,6 @@
 
 var cli = require('../lib/client.js');
 var should = require('should');
-var consts = require('../lib/const');
 var fs = require('fs');
 
 describe('client.test.js', function () {
