@@ -16,8 +16,8 @@ describe('client.test.js', function () {
       {host: '10.235.144.116', port: 5198}
     ], function (err) {
       if (err) {
-        console.log(err);
         done(err);
+        return;
       }
       done();
     });
