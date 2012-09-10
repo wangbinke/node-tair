@@ -12,6 +12,7 @@ describe('client.test.js', function () {
 
   before(function (done) {
     cli.initClient('group_ju', [
+      {host: '127.0.0.1', port: 62345},
       {host: '10.235.144.116', port: 5198}
     ], function (err) {
       if (err) {
@@ -91,5 +92,25 @@ describe('client.test.js', function () {
       });
     });
   });
+
+//  it('#mget will work well', function (done) {
+//    var testCases = {caonima: 'yamiedie', juhuacan: 'fuckyou', loli: 'dashu', meizi: 'shuaiguo'};
+//    var testKeys = ['caonima', 'juhuacan', 'loli', 'meizi'];
+//    var setCount = 4;
+//    for (var k in testCases) {
+//      var v = testCases[k];
+//      cli.set(k, v, function (err, succ) {
+//        should.not.exist(err);
+//        succ.should.be.equal(true);
+//        setCount --;
+//        if (setCount === 0) {
+//          cli.mget(testKeys, function (err, data) {
+//            should.not.exist(err);
+//            data.shoule.have.property('caonima');
+//          });
+//        }
+//      });
+//    }
+//  });
 
 });
