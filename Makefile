@@ -10,6 +10,8 @@ PKGS_SVN = $(shell dirname `dirname $(SVNURL)`)/npm/pkgs
 test:
 	@NODE_ENV=test mocha \
 		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) $(TESTS)
+	@NODE_ENV=test mocha \
+  		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) test/no_init.js
 
 test-cov-json: lib-cov
 	@mv lib lib-bak
