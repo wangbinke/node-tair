@@ -130,7 +130,7 @@ The test config is same as above, but we use fewer total request then above to r
         <td>set</td> <td>5</td> <td>12500</td> <td>10794.47</td> <td>0.5</td> <td>No</td>
     </tr>
     <tr>
-        <td>get</td> <td>10</td> <td>25000</td> <td>9494.87</td> <td>1.0/td> <td>No</td>
+        <td>get</td> <td>10</td> <td>25000</td> <td>9494.87</td> <td>1.0</td> <td>No</td>
     </tr>
     <tr>
         <td>set</td> <td>10</td> <td>25000</td> <td>17730.5</td> <td>0.6</td> <td>No</td>
