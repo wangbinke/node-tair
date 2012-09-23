@@ -15,6 +15,7 @@ var content = 'testforcontent9515746301152565720|2592155@2837774@2738597@12' +
 
 var costTime = 0;
 var errCount = 0;
+var rt = [];
 
 bench.set = function (maxTimes) {
   var ccount = 0;
@@ -46,10 +47,12 @@ function worker (times, starttime, maxTimes, method, cli) {
   if (method === 'set') {
     arg2 = content;
   }
+  var start = new Date().getTime();
   cli[method]('hello2test', arg2, function (err, data) {
     if (err) {
       console.log(err);
     }
+    rt.push((new Date().getTime()) - start);
     times = times || 1;
     times++;
     if (data !== content && data !== true) {
@@ -62,6 +65,7 @@ function worker (times, starttime, maxTimes, method, cli) {
       if (!cluster.isMaster) {
         costTime = (new Date().getTime() - starttime);
         process.send(costTime);
+        process.send({rt: rt});
         cluster.worker.destroy();
       }
     }
@@ -79,6 +83,7 @@ function main (argv) {
   }
   if (cluster.isMaster) {
     console.log('Node-Tair Benchmark Started, Waiting...');
+    var rta = [];
     threads = parseInt(threads, 10);
     for (var i = 0; i < threads; i++) {
       cluster.fork();
@@ -90,6 +95,8 @@ function main (argv) {
           errCount++;
         } else if (!isNaN(parseInt(msg, 10))) {
           costTime += parseInt(msg, 10);
+        } else if (msg.rt) {
+          rta = rta.concat(msg.rt);
         }
       });
     });
@@ -98,8 +105,13 @@ function main (argv) {
       if (finished === threads) {
         console.log('Node-Tair Benchmark Finished.');
         var qps = (threads * times / Math.floor(costTime / threads, 10) * 1000).toFixed(2);
-        console.log('Working Threads: %d\nRequest Counts: %d\nSuccess: %d\nFailure: %d\nCost Time: %d [ms]\nQPS: %d [#/sec]',
-          threads, threads * times, threads * times - errCount, errCount, Math.floor(costTime / threads, 10), qps
+        var rth = 0;
+        for (var i = 0; i < rta.length; i++) {
+          rth += rta[i];
+        }
+
+        console.log('Working Threads: %d\nRequest Counts: %d\nSuccess: %d\nFailure: %d\nCost Time: %d [ms]\nQPS: %d [#/sec]\nMin rt: %d [ms]\nMax rt: %d [ms]\nAvg rt: %d [ms]\n',
+          threads, threads * times, threads * times - errCount, errCount, Math.floor(costTime / threads, 10), qps, Math.min.apply(null, rta), Math.max.apply(null, rta), (rth / rta.length).toFixed(1)
         );
       }
     });
