@@ -19,25 +19,25 @@ var errCount = 0;
 bench.set = function (maxTimes) {
   var ccount = 0;
   var cli = require('./../index');
-  cli.initClient('group_ju', [
+  var tair = new cli('group_ju', [
     {host: '10.235.144.116', port: 5198}
   ], function (err) {
     if (err) {
       console.log(err);
     }
-    worker(0, new Date().getTime(), maxTimes, 'set', cli);
+    worker(0, new Date().getTime(), maxTimes, 'set', tair);
   });
 };
 
 bench.get = function (maxTimes) {
   var cli = require('./../index');
-  cli.initClient('group_ju', [
+  var tair = new cli('group_ju', [
     {host: '10.235.144.116', port: 5198}
   ], function (err) {
     if (err) {
       console.log(err);
     }
-    worker(0, new Date().getTime(), maxTimes, 'get', cli);
+    worker(0, new Date().getTime(), maxTimes, 'get', tair);
   });
 };
 

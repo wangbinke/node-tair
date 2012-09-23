@@ -15,11 +15,11 @@ Strongly recommand you use node >= 0.8.0 to use this lib for its performance imp
 
 	var configServer = [{host: '10.20.30.40', port: 5189}]; /* you can also add another slave server to it */
 	// firstly must
-	cli.initClient('group_name', configServer, function (err){
+	var tair = new cli('group_name', configServer, function (err){
 		if (err) {
 			console.log(err);
 		}
-		cli.set('key', 'value', function(err, isSuccess){
+		tair.set('key', 'value', function(err, isSuccess){
 			console.log(success);
 		});
 	});
@@ -28,14 +28,14 @@ Strongly recommand you use node >= 0.8.0 to use this lib for its performance imp
 ## API
 
 
-	tair.initClient (groupName, hostList, callback)
+	Tair(groupName, hostList, callback)
 	 * initial clients from config servers, must be first called, all three params must be used
 	 * @params groupnName：group name of tair
 	 * @params hostList: config server list of tair, like [{host: '10.235.144.116', port: 5198}]
 	 * @params callback(err):
 
 
-	tair.set / tair.setEx (key, value, [expire], [namespace], [version], callback)
+	Tair.set / Tair.setEx (key, value, [expire], [namespace], [version], callback)
 	 * set a key with a value
 	 * @params key：must be string, the key to set
 	 * @params value: usually string, the value to set
@@ -45,21 +45,21 @@ Strongly recommand you use node >= 0.8.0 to use this lib for its performance imp
 	 * @params callback(err, success): success is true when set successfully
 
 
-	tair.get (key, [namespace], callback)
+	Tair.get (key, [namespace], callback)
 	 * get a key from a datanode
 	 * @params key：must be string, the key to get
 	 * @params namespace: the area(namespace) of data, number 0~1023, optional, default is 0
 	 * @params callback(err, data): if key on server is not exist
 
 
-	tair.remove (key, [namespace], callback) 
+	Tair.remove (key, [namespace], callback)
 	 * remove / delete a key from a datanode
 	 * @params key：must be string, the key to remove
 	 * @params namespace: the area(namespace) of data, number 0~1023, optional, default is 0
 	 * @params callback(err): 
 
 
-	tair.incr / tair.decr (key, [count], [namespace], [initValue], [expire], callback)
+	Tair.incr / Tair.decr (key, [count], [namespace], [initValue], [expire], callback)
 	 * increace or decreace a count object on tair, count object is different from object from usually set / get. First use these method on a key will create it with initValue or 0;
 	 * @params key：must be string, the key to remove
 	 * @params count: amount to plus or minus, usually be positive number

@@ -8,10 +8,12 @@ var cli = require('../lib/client.js');
 var should = require('should');
 var fs = require('fs');
 
+var tair;
+
 describe('client.test.js', function () {
 
   before(function (done) {
-    cli.initClient('group_ju', [
+    tair = new cli('group_ju', [
       {host: '127.0.0.1', port: 62345},
       {host: '10.235.144.116', port: 5198}
     ], function (err) {
@@ -24,7 +26,7 @@ describe('client.test.js', function () {
   });
 
   it('#set method should set a data', function (done) {
-    cli.set('unittestjs', 'we are testers', function (err, success) {
+    tair.set('unittestjs', 'we are testers', function (err, success) {
       should.not.exist(err);
       success.should.equal(true);
       done();
@@ -32,7 +34,7 @@ describe('client.test.js', function () {
   });
 
   it('#get method should get right data', function (done) {
-    cli.get('unittestjs', function (err, data) {
+    tair.get('unittestjs', function (err, data) {
       should.not.exist(err);
       data.should.equal('we are testers');
       done();
@@ -40,7 +42,7 @@ describe('client.test.js', function () {
   });
 
   it('#get method should get empty data when key is wrong', function (done) {
-    cli.get('zhemechangniyoume', function (err, data) {
+    tair.get('zhemechangniyoume', function (err, data) {
       should.not.exist(err);
       should.not.exist(data);
       done();
@@ -48,12 +50,12 @@ describe('client.test.js', function () {
   });
 
   it('#remove method should remove data right', function (done) {
-    cli.set('unittestjs', 'we are testers', function (err, success) {
+    tair.set('unittestjs', 'we are testers', function (err, success) {
       should.not.exist(err);
       success.should.equal(true);
-      cli.remove('unittestjs', function (err) {
+      tair.remove('unittestjs', function (err) {
         should.not.exist(err);
-        cli.get('unittestjs', function (err, data) {
+        tair.get('unittestjs', function (err, data) {
           should.not.exist(err);
           should.not.exist(data);
           done();
@@ -64,10 +66,10 @@ describe('client.test.js', function () {
 
   it('#set and #get will work well on large data', function (done) {
     var content = fs.readFileSync('./test/large_text.txt', 'utf-8');
-    cli.set('alargeData', content, function (err, success) {
+    tair.set('alargeData', content, function (err, success) {
       should.not.exist(err);
       success.should.equal(true);
-      cli.get('alargeData', function (err, data) {
+      tair.get('alargeData', function (err, data) {
         should.not.exist(err);
         data.should.equal(content);
         done();
@@ -77,14 +79,14 @@ describe('client.test.js', function () {
 
   it('#incr and decr will work well', function (done) {
     var keyName = 'incrTestKey' + new Date().getTime();
-    cli.incr(keyName, 1, function (err, data) {
+    tair.incr(keyName, 1, function (err, data) {
       should.not.exist(err);
       data.should.equal(1);
 
-      cli.decr(keyName, 1, function (err, data) {
+      tair.decr(keyName, 1, function (err, data) {
         should.not.exist(err);
         data.should.equal(0);
-        cli.incr(keyName, 0, function (err, data) {
+        tair.incr(keyName, 0, function (err, data) {
           should.not.exist(err);
           data.should.equal(0);
           done();

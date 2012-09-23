@@ -2,7 +2,7 @@ NAME = tair
 SRC = $(shell find lib -type f -name "*.js")
 TESTS = test/*.test.js
 TESTTIMEOUT = 6000
-REPORTER = dot
+REPORTER = spec
 VERSION = $(shell date +%Y%m%d%H%M%S)
 SVNURL = $(shell svn info | grep URL | awk '{print $$2}')
 PKGS_SVN = $(shell dirname `dirname $(SVNURL)`)/npm/pkgs
@@ -10,8 +10,6 @@ PKGS_SVN = $(shell dirname `dirname $(SVNURL)`)/npm/pkgs
 test:
 	@NODE_ENV=test mocha \
 		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) $(TESTS)
-	@NODE_ENV=test mocha \
-  		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) test/no_init.js
 
 test-cov-json: lib-cov
 	@mv lib lib-bak

@@ -9,16 +9,15 @@ var should = require('should');
 
 describe('client.test.js', function () {
   it('should put req in queue when not init, and after init well deal them', function (done) {
-    cli.set('unittestjs', 'we are testers', function (err, success) {
-      should.not.exist(err);
-      success.should.equal(true);
-      done();
-    });
-    cli.initClient('group_ju', [
-      {host: '127.0.0.1', port: 62345},
+    var tair = new cli('group_ju', [
       {host: '10.235.144.116', port: 5198}
     ], function (err) {
       should.not.exist(err);
+    });
+    tair.set('unittestjs', 'we are testers', function (err, success) {
+      should.not.exist(err);
+      success.should.equal(true);
+      done();
     });
   });
 });
