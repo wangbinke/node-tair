@@ -108,9 +108,9 @@ The test config is same as above, but we use fewer total request then above to r
 
 
 <table>
-    <th>
+    <tr>
         <td>Method</td> <td>Thread Number</td> <td>Req. Total</td> <td>QPS(#/s)</td> <td>Avg. RT(ms)</td> <td>Has Failure?</td>
-    </th>
+    </tr>
     <tr>
         <td>get</td> <td>1</td> <td>2500</td> <td>1169.86</td> <td>0.8</td> <td>No</td>
     </tr>
