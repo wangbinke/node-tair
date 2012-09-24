@@ -95,24 +95,27 @@ describe('client.test.js', function () {
     });
   });
 
-//  it('#mget will work well', function (done) {
-//    var testCases = {caonima: 'yamiedie', juhuacan: 'fuckyou', loli: 'dashu', meizi: 'shuaiguo'};
-//    var testKeys = ['caonima', 'juhuacan', 'loli', 'meizi'];
-//    var setCount = 4;
-//    for (var k in testCases) {
-//      var v = testCases[k];
-//      cli.set(k, v, function (err, succ) {
-//        should.not.exist(err);
-//        succ.should.be.equal(true);
-//        setCount --;
-//        if (setCount === 0) {
-//          cli.mget(testKeys, function (err, data) {
-//            should.not.exist(err);
-//            data.shoule.have.property('caonima');
-//          });
-//        }
-//      });
-//    }
-//  });
+  it('#mget will work well', function (done) {
+    var testCases = {caonima: 'yamiedie', juhuacan: 'fuckyou', loli: 'dashu', meizi: 'shuaiguo'};
+    var testKeys = ['caonima', 'juhuacan', 'loli', 'meizi'];
+    var setCount = 4;
+    for (var k in testCases) {
+      var v = testCases[k];
+      tair.set(k, v, function (err, succ) {
+        should.not.exist(err);
+        succ.should.be.equal(true);
+        setCount--;
+        if (setCount === 0) {
+          tair.mget(testKeys, function (err, data) {
+            should.not.exist(err);
+            data.should.have.property('caonima');
+            data.length.should.equal(3);
+            data.juhuacan.should.equal('fuckyou');
+            done();
+          });
+        }
+      });
+    }
+  });
 
 });
