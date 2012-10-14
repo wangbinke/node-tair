@@ -5,6 +5,7 @@
  */
 
 var trans = require('../lib/transcoder');
+var should = require('should');
 
 describe('transcoder.test.js', function () {
   it('should encode and decode number right', function () {
@@ -30,5 +31,15 @@ describe('transcoder.test.js', function () {
     var enc = trans.encode(bool, 'utf-8', true);
     enc.should.length(2 + bool.length);
     var dec = trans.decode(enc);
+  });
+  it('should encode and decode boolean right', function () {
+    var bool = true;
+    var enc = trans.encode(bool, 'utf-8', true);
+    enc.should.length(3);
+    var dec = trans.decode(enc);
+  });
+  it('should return null when no obj input', function () {
+    var enc = trans.encode(null, 'utf-8', true);
+    should.not.exist(enc);
   });
 });

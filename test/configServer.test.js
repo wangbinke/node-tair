@@ -9,8 +9,8 @@ var should = require('should');
 
 describe('configServer.test.js', function () {
   it('should get configure right', function (done) {
-    configServer.retrieveConfigure('group_ju', 0, [
-      {host: '10.235.144.116', port: 5198}
+    configServer.retrieveConfigure('group_market2', 0, [
+      {host: '10.235.144.195', port: 5198}
     ], function (err, ret) {
       should.not.exist(err);
       ret.configVersion.should.above(0);
@@ -22,9 +22,9 @@ describe('configServer.test.js', function () {
   });
 
   it('should get right configure from another one first server down', function (done) {
-    configServer.retrieveConfigure('group_ju', 0, [
+    configServer.retrieveConfigure('group_market2', 0, [
       {host: '127.0.0.1', port: 62345},
-      {host: '10.235.144.116', port: 5198}
+      {host: '10.235.144.195', port: 5198}
     ], function (err, ret) {
       should.not.exist(err);
       ret.configVersion.should.above(0);
@@ -33,5 +33,17 @@ describe('configServer.test.js', function () {
       ret.serverList[0].should.length(ret.bucketCount);
       done();
     });
+  });
+
+  it('#getDateNode error test', function () {
+    var that = {
+      serverList: null
+    };
+    var zero = configServer.getDataNode.call(that, 'sdf');
+    zero.should.equal(0);
+    that.serverList = ['1234567', '7890101'];
+    that.aliveNodes = {};
+    zero = configServer.getDataNode.call(that, 'sdf', true);
+    zero.should.equal(0);
   });
 });
