@@ -1,7 +1,7 @@
 {
   "name": "tair",
   "description": "Taobao Tair Client for Node.js",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "keywords": [ "taobao", "tair", "key value", "client" ],
   "author": "sunfang1cn <kate.sf@taobao.com>",
   "scripts": {
