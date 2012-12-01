@@ -41,13 +41,15 @@ describe('client.test.js', function () {
     });
   });
 
-  it('#get method should get buffer data when datatype is buffer', function (done) {
-    tair.get('unittestjs', function (err, data) {
-      should.not.exist(err);
-      should.exist(data);
-      Buffer.isBuffer(data).should.be.ok();
-      done();
-    }, false, 'buffer');
+  it('#get and #set method should get buffer data when datatype is buffer', function (done) {
+    tair.set('unittestjs2', new Buffer('we are testers'), function (err, success) {
+      tair.get('unittestjs2', 0, function (err, data) {
+        should.not.exist(err);
+        should.exist(data);
+        should.ok(Buffer.isBuffer(data));
+        done();
+      }, false, 'buffer');
+    });
   });
 
   it('#get method should get empty data when key is wrong', function (done) {
