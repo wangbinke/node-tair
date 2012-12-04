@@ -21,6 +21,16 @@ describe('configServer.test.js', function () {
     });
   });
 
+  it('should have not lost any of config when retrieveConfigure', function (done) {
+    configServer.retrieveConfigure('group_market2', 0, [
+      {host: '10.235.144.195', port: 5198}
+    ], function (err, ret) {
+    });
+    configServer.serverList.length.should.above(0);
+    configServer.bucketCount.should.above(0);
+    done();
+  });
+
   it('should get right configure from another one first server down', function (done) {
     configServer.retrieveConfigure('group_market2', 0, [
       {host: '127.0.0.1', port: 62345},
