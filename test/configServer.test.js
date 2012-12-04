@@ -25,10 +25,15 @@ describe('configServer.test.js', function () {
     configServer.retrieveConfigure('group_market2', 0, [
       {host: '10.235.144.195', port: 5198}
     ], function (err, ret) {
+      should.not.exist(err);
+      configServer.retrieveConfigure('group_market2', 0, [
+        {host: '10.235.144.195', port: 5198}
+      ], function (err, ret) {
+      });
+      configServer.serverList.length.should.above(0);
+      configServer.bucketCount.should.above(0);
+      done();
     });
-    configServer.serverList.length.should.above(0);
-    configServer.bucketCount.should.above(0);
-    done();
   });
 
   it('should get right configure from another one first server down', function (done) {
@@ -41,6 +46,15 @@ describe('configServer.test.js', function () {
       ret.bucketCount.should.above(0);
       should.exist(ret.aliveNode);
       ret.serverList[0].should.length(ret.bucketCount);
+      done();
+    });
+  });
+
+  it('should callback (err) when server is down ', function (done) {
+    configServer.retrieveConfigure('group_market2', 0, [
+      {host: '127.0.0.1', port: 62345}
+    ], function (err, ret) {
+      should.exist(err);
       done();
     });
   });
