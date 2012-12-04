@@ -8,7 +8,7 @@ SVNURL = $(shell svn info | grep URL | awk '{print $$2}')
 PKGS_SVN = $(shell dirname `dirname $(SVNURL)`)/npm/pkgs
 
 test:
-	@NODE_ENV=test mocha \
+	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) $(TESTS)
 
 test-cov-json: lib-cov
