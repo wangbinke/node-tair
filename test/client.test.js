@@ -106,6 +106,14 @@ describe('client.test.js', function () {
     });
   });
 
+  it('heartbeat should work', function (done) {
+    tair.heartbeat(function (count) {
+      count.should.above(0);
+      count.should.below(100);
+      done();
+    });
+  });
+
   it('#mget will work well', function (done) {
     var testCases = {caonima: 'yamiedie', juhuacan: 'fuckyou', loli: 'dashu', meizi: 'shuaiguo'};
     var testKeys = ['caonima', 'juhuacan', 'loli', 'meizi'];
