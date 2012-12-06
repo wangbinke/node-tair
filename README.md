@@ -32,6 +32,9 @@ var tair = new cli('group_name', configServer, function (err){
 	 * initial clients from config servers, must be first called, all three params must be used
 	 * @params groupnName：group name of tair
 	 * @params hostList: config server list of tair, like [{host: '10.235.144.116', port: 5198}]
+	 * @params options:
+   *        - heartBeatInterval = 10 * 1000 {Number} interval time for heartbeat, mili-seconds
+   *        - timeout = 5000 {Number}, timeout for network, mili-seconds
 	 * @params callback(err):
 
 
@@ -45,12 +48,19 @@ var tair = new cli('group_name', configServer, function (err){
 	 * @params callback(err, success): success is true when set successfully
 
 
-	Tair.get (key, [namespace], callback)
+	Tair.get (key, [namespace], callback, fitJava, dataType)
 	 * get a key from a datanode
 	 * @params key：must be string, the key to get
 	 * @params namespace: the area(namespace) of data, number 0~1023, optional, default is 0
-	 * @params callback(err, data): if key on server is not exist
+	 * @params callback(err, data): if key on server is not exist, data is null, or data will be a string or buffer
+   * @params fitJava: true/ false, set to fit java key type
+   * @params datatype: 'string' or 'buffer', returned data type, default is string.
 
+  Tair.mget (keys, [namespace], callback)
+   * get multi keys from tair
+   * @params keys：must be an array of string, the keys to get
+   * @params namespace: the area(namespace) of data, number 0~1023, optional, default is 0
+   * @params callback(err, data): if key on server is not exist, data is null, or data will be an map
 
 	Tair.remove (key, [namespace], callback)
 	 * remove / delete a key from a datanode
