@@ -16,13 +16,14 @@ describe('client.test.js', function () {
     tair = new cli('group_market2', [
       {host: '127.0.0.1', port: 62345},
       {host: '10.235.144.195', port: 5198}
-    ], function (err) {
-      if (err) {
-        done(err);
-        return;
-      }
-      done();
-    });
+    ], {heartBeatInterval: 3000},
+      function (err) {
+        if (err) {
+          done(err);
+          return;
+        }
+        done();
+      });
   });
 
   it('#set method should set a data', function (done) {
@@ -110,8 +111,11 @@ describe('client.test.js', function () {
     tair.heartbeat(function (count) {
       count.should.above(0);
       count.should.below(100);
-      done();
     });
+    setTimeout(function () {
+      tair.heartBeatCount.should.equal(3);
+      done();
+    }, 4 * 1000);
   });
 
   it('#mget will work well', function (done) {
