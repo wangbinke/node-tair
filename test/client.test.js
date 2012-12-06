@@ -107,11 +107,17 @@ describe('client.test.js', function () {
   });
 
   it('heartbeat should work', function (done) {
+    var runCount = 0;
+    tair.heartBeatInterval = 3000;
     tair.heartbeat(function (count) {
       count.should.above(0);
       count.should.below(100);
-      done();
+      runCount++;
     });
+    setTimeout(function () {
+      runCount.should.equal(2);
+      done();
+    }, 4 * 1000);
   });
 
   it('#mget will work well', function (done) {
