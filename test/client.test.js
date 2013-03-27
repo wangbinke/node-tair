@@ -115,7 +115,7 @@ describe('client.test.js', function () {
     setTimeout(function () {
       tair.heartBeatCount.should.equal(3);
       done();
-    }, 5 * 1000);
+    }, 4 * 1000);
   });
 
   it('#mget will work well', function (done) {
