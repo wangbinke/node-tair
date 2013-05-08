@@ -33,8 +33,8 @@ var tair = new cli('group_name', configServer, function (err){
 	 * @params groupnName：group name of tair
 	 * @params hostList: config server list of tair, like [{host: '10.235.144.116', port: 5198}]
 	 * @params options:
-   *        - heartBeatInterval = 10 * 1000 {Number} interval time for heartbeat, mili-seconds
-   *        - timeout = 5000 {Number}, timeout for network, mili-seconds
+   * heartBeatInterval = 10 * 1000 {Number} interval time for heartbeat, mili-seconds
+   * timeout = 5000 {Number}, timeout for network, mili-seconds
 	 * @params callback(err):
 
 
