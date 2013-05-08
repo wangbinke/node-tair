@@ -27,7 +27,7 @@ var tair = new cli('group_name', configServer, function (err){
 
 ## API
 
-
+````js
 	Tair(groupName, hostList, callback)
 	 * initial clients from config servers, must be first called, all three params must be used
 	 * @params groupnName：group name of tair
@@ -77,7 +77,7 @@ var tair = new cli('group_name', configServer, function (err){
 	 * @params initValue: if key is not exist, give it a value
 	 * @params expire: if key is not exist, the new value`s expire(seconds)
 	 * @params callback(err, data): data is the count number after incr or decr.
-
+````
 ## Preformance
 
 #### Compare Tests
