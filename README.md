@@ -32,10 +32,10 @@ var tair = new cli('group_name', configServer, function (err){
 	 * initial clients from config servers, must be first called, all three params must be used
 	 * @params groupnName：group name of tair
 	 * @params hostList: config server list of tair, like [{host: '10.235.144.116', port: 5198}]
-	 * @params options:
+	 * @params options
    * heartBeatInterval = 10 * 1000 {Number} interval time for heartbeat, mili-seconds
    * timeout = 5000 {Number}, timeout for network, mili-seconds
-	 * @params callback(err):
+	 * @params callback(err)
 
 
 	Tair.set / Tair.setEx (key, value, [expire], [namespace], [version], callback)
@@ -66,7 +66,7 @@ var tair = new cli('group_name', configServer, function (err){
 	 * remove / delete a key from a datanode
 	 * @params key：must be string, the key to remove
 	 * @params namespace: the area(namespace) of data, number 0~1023, optional, default is 0
-	 * @params callback(err): 
+	 * @params callback(err)
 
 
 	Tair.incr / Tair.decr (key, [count], [namespace], [initValue], [expire], callback)
