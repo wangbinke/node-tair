@@ -1,11 +1,14 @@
 {
   "name": "tair",
   "description": "Taobao Tair Client for Node.js",
-  "version": "0.0.23",
+  "version": "0.0.26",
   "keywords": [ "taobao", "tair", "key value", "client" ],
   "author": "sunfang1cn <kate.sf@taobao.com>",
   "scripts": {
     "test": "make test"
+  },
+  "dependencies": {
+    "cutter": "0.0.3"
   },
   "devDependencies": {
     "should": ">=0.4.2",

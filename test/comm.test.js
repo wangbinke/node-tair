@@ -17,7 +17,7 @@ describe('comm.test.js', function () {
     });
   });
 
-  it('comm to a non-tair server should throw', function (done) {
+  it.skip('comm to a non-tair server should throw', function (done) {
     var addr = {host: '218.2.103.166', port: 80};
     var buf = new Buffer('get /\r\nhost www.baidu.com');
     comm.getData(addr, buf, function (err, data) {

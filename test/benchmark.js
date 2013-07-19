@@ -20,8 +20,8 @@ var rt = [];
 bench.set = function (maxTimes) {
   var ccount = 0;
   var cli = require('./../index');
-  var tair = new cli('group_1', [
-    {host: '10.232.37.57', port: 5198}
+  var tair = new cli('group_ju', [
+    {host: '10.235.144.116', port: 5198}
   ], function (err) {
     if (err) {
       console.log(err);
